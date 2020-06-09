@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %} Sign Up {% endblock title %}
+{% load static %}
+{% block content %}
+  {% if registered %}
+      <div class="alert alert-success">
+          You are successfully registered <p><a href="#">Login here </p>
+      </div>
+  {% else %}
+
+
+
+
+    <h2> Register </h2>
+    <div class="form-group">
+    <form  method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Register">
+    </form>
+
+    <p>Already have an account ?  <a href="#">Login here </a></p>
+    </div><
+{% endif %}
+{% endblock %}
