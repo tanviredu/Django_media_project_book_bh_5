@@ -7,6 +7,8 @@ from django.contrib.auth.forms import AuthenticationForm
 # for editing
 from django.contrib.auth.forms import UserChangeForm
 
+from .models import UserProfile
+
 class MyRegistrationForm(UserCreationForm):
     ## adding new email feature
     email = forms.EmailField(required=True)
@@ -32,3 +34,10 @@ class UserProfileChange(UserChangeForm):
     class Meta:
         model = User
         fields = ('username','email','first_name','last_name','password')
+
+
+class ProfilePic(forms.ModelForm):
+
+    class Meta:
+        model = UserProfile
+        fields = ['profile_pic',]

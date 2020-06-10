@@ -14,7 +14,7 @@
      <img class="card-img-top" src="/media/{{user.user_profile.profile_pic}}" alt="Card image cap">
     <h1></h1>
   {% else %}
-  <img class="card-img-top" src="/media/profile_pic/no_profile.jpg" alt="Card image cap">
+  <img class="card-img-top" src="/media/profile_pics/no_profile.jpg" alt="Card image cap">
 
   {% endif %}
     <div class="card-body">
@@ -27,8 +27,9 @@
       <li class="list-group-item">Name : {{user.first_name}} {{user.last_name}}</li>
     </ul>
     <div class="card-body">
-      <a href="{% url 'App_login:user_change'%}" class="card-link">Change User information</a>
-      <a href="#" class="card-link">Another new Featue</a>
+      <a href="{% url 'App_login:user_change'%}" class="btn btn-info">Change User information</a>
+    <hr>
+      <a href="#" class="btn btn-danger">Add or change pics</a>
     </div>
   </div>
 
