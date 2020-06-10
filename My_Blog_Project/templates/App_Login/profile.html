@@ -3,6 +3,20 @@
 {% load static %}
 {% block content %}
   <div class="card" style="width: 18rem;">
+<!-- check id the user profile pic is set or not
+    we can call the class of the user
+    with related name the UserProfile model
+    is related to the User class with  a related name user_profile it will directly call the class
+    we can call that
+-->
+  {% if user.user_profile %}
+
+     <img class="card-img-top" src="/media/{{user.user_profile.profile_pic}}" alt="Card image cap">
+    <h1></h1>
+  {% else %}
+  <img class="card-img-top" src="/media/profile_pic/no_profile.jpg" alt="Card image cap">
+
+  {% endif %}
     <div class="card-body">
       <h5 class="card-title">User Profile</h5>
       <p class="card-text"></p>
