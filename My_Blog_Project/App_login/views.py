@@ -1,5 +1,5 @@
 from django.shortcuts import render,HttpResponseRedirect
-from .forms import MyRegistrationForm,UserProfileChange
+from .forms import MyRegistrationForm,UserProfileChange,ProfilePic
 from django.contrib.auth.forms import AuthenticationForm
 
 # need separate form for changing password
@@ -76,6 +76,45 @@ def pass_change(request):
         form = PasswordChangeForm(current_user,data=request.POST)
         if form.is_valid():
             form.save()
-            
+
 
     return render(request,"App_login/change_pass.html",{'form':form})
+
+
+
+@login_required
+def add_pro_pic(request):
+    form = ProfilePic()
+    if request.method == 'POST':
+        #user submitted the form
+        form = ProfilePic(request.POST,request.FILES)
+        if form.is_valid():
+            # hold the form not save yet
+            # you need to add the user too
+            user_objet = form.save(commit=False)
+            ## addinng the information
+            ## with the photo
+            ## so only this user pgoto wil change
+            user_objet.user = request.user
+            user_objet.save()
+            return HttpResponseRedirect(reverse('App_login:profile'))
+
+    return render(request,'App_Login/profile_pic_add.html',{'form':form})
+
+
+
+@login_required
+def change_pro_pic(request):
+    form = ProfilePic(instance=request.user.user_profile)
+    if request.method == "POST":
+        ## you have to give three
+        ## parameters so that user take
+        ## any post information
+        ## and the file
+        ## and the user object it need to change
+        form = ProfilePic(request.POST,request.FILES,instance=request.user.user_profile)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('App_login:profile'))
+
+    return render(request,'App_Login/profile_pic_add.html',{'form':form})
